@@ -1,0 +1,196 @@
+#Making bob the turtle!
+import turtle
+import random
+
+#making bob
+bob = turtle.Turtle()
+bob.speed('fastest')
+
+#hiding bob's curser
+bob.ht()
+
+#seaweed function
+def seaweed(size,length):
+    #getting first coridents
+    seaweed_start_pos = bob.pos()
+    x1 = bob.xcor()
+    y1 = bob.ycor()
+    bob.fillcolor("#41FF53")
+
+    #start of the seaweed
+    j = 0
+    count = 0
+    bob.left(95)
+    bob.begin_fill()
+    bob.down()
+    
+    while j <= size:
+        bob.forward(length)
+        bob.right(45)
+        bob.forward(length)
+        bob.left(45)
+        j += 1
+        count +=1
+
+    #top of the seaweed
+    seaweed_top_pos = bob.pos()
+    bob.right(145)
+
+    j = size
+    while j >= 0:
+        bob.forward(length)
+        bob.right(45)
+        bob.forward(length)
+        bob.left(45)
+        j += -1
+
+    #grabbing the end of the seaweed
+    x2 = bob.xcor()
+    y2 = bob.ycor()
+
+    #completeing the seaweed
+    bob.setpos(seaweed_start_pos)
+    bob.end_fill()
+    bob.up()
+    bob.right(95)
+
+    #making the line down the middle
+    bob.setpos(((x1+x2)/2),((y1+y2)/2))
+    bob.down()
+    bob.setpos(seaweed_top_pos)
+    bob.up()
+    bob.home()
+
+
+#making background
+bob.getscreen().bgcolor('#088ADE')
+
+#making bubble textures
+scale =  100
+offset = 5 * scale
+r_offest = 20
+
+for i in range(10):
+    x = i * scale - offset + (random.randint(-r_offest,r_offest))
+    for j in range(10):
+        y = j * scale - offset + (random.randint(-r_offest,r_offest))
+        
+        bob.penup()
+        bob.setposition(x, y)
+        bob.pendown()
+
+        bob.color('white')
+        bob.circle(5)
+
+bob.color("black")
+bob.penup()
+bob.home()
+
+#making rectangle floor
+bob.penup()
+bob.fillcolor('#AB4317')
+bob.begin_fill()
+bob.setpos(-490,-230)
+bob.down()
+bob.forward(1050)
+bob.right(90)
+bob.forward(500)
+bob.right(90)
+bob.forward(1050)
+bob.right(90)
+bob.forward(500)
+bob.end_fill()
+bob.up()
+
+#calling seaweed to make seaweed textures
+for i in range(10):
+    bob.up()
+    bob.home()
+    x = i * scale - offset
+    bob.up()
+    bob.setpos((x + (random.randint(-r_offest,r_offest)),(-250 + (random.randint(-r_offest,r_offest)))))
+    bob.down()
+    seaweed((random.randint(3,10)),(random.randint(10,22)))
+    bob.home()
+
+
+#Bob's Tail pos
+bob.home()
+bob.up()
+bob.setpos(-75,150)
+tp = bob.pos()
+bob.setpos(tp)
+bob.pos()
+bob.down()
+
+#bob's tail
+bob.fillcolor("#08E989")
+bob.begin_fill()
+bob.back(50)
+bob.right(45)
+bob.forward(100)
+bob.setpos(tp)
+bob.pos()
+bob.end_fill()
+
+#bob's shell pos
+bob.up()
+bob.home()
+bob.down()
+
+#bob's shell
+bob.fillcolor("green")
+bob.begin_fill()
+bob.circle(100)
+bob.end_fill()
+
+#moving bob to front foot
+bob.up()
+bob.setpos(70,0)
+bob.down()
+
+#bob's front foot
+bob.fillcolor("#08E989")
+bob.begin_fill()
+bob.circle(15)
+bob.end_fill()
+
+#moving bob to back foot
+bob.up()
+bob.setpos(-70,0)
+bob.down()
+
+#bob's back foot
+bob.fillcolor("#08E989")
+bob.begin_fill()
+bob.circle(15)
+bob.end_fill()
+
+#moving bob to head
+bob.up()
+bob.setpos(100,150)
+bob.down()
+
+#bob's head
+bob.fillcolor("#08E989")
+bob.begin_fill()
+bob.circle(50)
+bob.end_fill()
+
+#bob's eye
+bob.up()
+bob.setpos(120,210)
+bob.down()
+bob.dot(12,"#9F1312")
+
+#bob says hi
+bob.up()
+bob.setpos(200,225)
+bob.down()
+
+bob.color("yellow")
+bob.write("Hi! I am Bob!", font=("Times New Roman", 25, "bold"))
+
+turtle.done()
+
+
